@@ -17,3 +17,13 @@ function loadHeader(currentPage){
         })
 }
 
+
+function loadFooter(){
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = data;
+            document.getElementById('footer').innerHTML = tempDiv.innerHTML;
+        })
+}
