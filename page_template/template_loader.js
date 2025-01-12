@@ -1,6 +1,6 @@
 function loadHeader(currentPage){
     // const currentPage = window.location.href;
-    fetch('header.html')
+    fetch('page_template/header.html')
         .then(response => response.text())
         .then(data => {
             const tempDiv = document.createElement('div');
@@ -19,7 +19,7 @@ function loadHeader(currentPage){
 
 
 function loadFooter(){
-    fetch('footer.html')
+    fetch('page_template/footer.html')
         .then(response => response.text())
         .then(data => {
             const tempDiv = document.createElement('div');
