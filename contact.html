@@ -126,7 +126,7 @@
 
         </div>
 
-        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
+        <form name="submit-to-google-sheet" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
           <div class="row gy-4">
 
             <div class="col-md-6">
@@ -191,6 +191,17 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbznt3s3bxnJ6Gll8YlV-k8W1zIUcl6z2XctJam8WLBiJ33I5hIbPJhD18ihXWTeNTBd/exec'
+    const form = document.forms['submit-to-google-sheet']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
 
 </body>
 
