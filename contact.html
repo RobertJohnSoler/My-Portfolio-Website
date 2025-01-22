@@ -144,22 +144,8 @@
               <div class="error-message"></div>
               <div class="sent-message">Your message has been sent. Thank you!</div>
 
-              <script>
-                function validateEmail(email) {
-                  var re = /\S+@\S+\.\S+/;
-                  return re.test(email);
-                }
-                function notif(){
-                  var email = document.getElementById("email").value;
-                  if (!validateEmail(email)){
-                    alert("Please enter a valid email address.");
-                    return;
-                  } else {
-                    alert("Message sent. Thank you!");
-                  }
-                }
-              </script>
-              <button onclick="notif()" type="submit">Send Message</button>
+            
+              <button type="submit">Send Message</button>
             </div>
 
           </div>
@@ -201,30 +187,30 @@
   <script src="assets/js/main.js"></script>
   <script>
     function validateEmail(email) {
-        var re = /\S+@\S+\.\S+/;
-        return re.test(email);
+      var re = /\S+@\S+\.\S+/;
+      return re.test(email);
     }
- 
     const scriptURL = 'https://script.google.com/macros/s/AKfycbznt3s3bxnJ6Gll8YlV-k8W1zIUcl6z2XctJam8WLBiJ33I5hIbPJhD18ihXWTeNTBd/exec'
     const form = document.forms['submit-to-google-sheet']
-
-    var email = document.getElementById("email").value;
-    
-    if (!validateEmail(email)){
-      alert("Please enter a valid email address.");
-      return;
-    } else {
-      form.addEventListener('submit', e => {
-      e.preventDefault()
+    form.addEventListener('submit', e => {
+      var email = document.getElementById("email").value;
+      if (!validateEmail(email)){
+        e.preventDefault()
+        alert("Please enter a valid email address.");
+      } else {
+        // e.preventDefault()
       fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(response => console.log('Success!', response))
         .catch(error => console.error('Error!', error.message))
-      });
-      alert("Message sent. Thank you!");
-      const contact_form = document.getElementById("contact-form");
-      contact_form.reset();
-    }
-  
+        alert("Message sent. Thank you!");
+        const contact_form = document.getElementById("contact-form");
+        contact_form.reset();
+      }
+      
+    });
+    
+    const contact_form = document.getElementById("contact-form");
+                    contact_form.reset();
   </script>
 
 </body>
