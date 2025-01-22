@@ -120,7 +120,7 @@
           <strong>Or use the form below:</strong>
         </div>
 
-        <form name="submit-to-google-sheet" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
+        <form name="submit-to-google-sheet" id="contact-form" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
           <div class="row gy-4">
 
             <div class="col-md-6">
@@ -128,7 +128,7 @@
             </div>
 
             <div class="col-md-6 ">
-              <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required="">
             </div>
 
             <div class="col-md-12">
@@ -145,8 +145,18 @@
               <div class="sent-message">Your message has been sent. Thank you!</div>
 
               <script>
+                function validateEmail(email) {
+                  var re = /\S+@\S+\.\S+/;
+                  return re.test(email);
+                }
                 function notif(){
-                  alert("Message sent. Thank you!");
+                  var email = document.getElementById("email").value;
+                  if (!validateEmail(email)){
+                    alert("Please enter a valid email address.");
+                    return;
+                  } else {
+                    alert("Message sent. Thank you!");
+                  }
                 }
               </script>
               <button onclick="notif()" type="submit">Send Message</button>
@@ -198,7 +208,10 @@
       fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(response => console.log('Success!', response))
         .catch(error => console.error('Error!', error.message))
-    })
+    });
+    
+    const contact_form = document.getElementById("contact-form");
+                    contact_form.reset();
   </script>
 
 </body>
